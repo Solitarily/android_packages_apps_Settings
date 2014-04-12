@@ -102,8 +102,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "toggle_large_text_preference";
     private static final String TOGGLE_POWER_BUTTON_ENDS_CALL_PREFERENCE =
             "toggle_power_button_ends_call_preference";
-    private static final String TOGGLE_HOME_BUTTON_ANSWERS_CALL_PREFERENCE =
-            "toggle_home_button_answers_call_preference";
     private static final String TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE =
             "toggle_lock_screen_rotation_preference";
     private static final String TOGGLE_SPEAK_PASSWORD_PREFERENCE =
@@ -178,7 +176,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     private CheckBoxPreference mToggleLargeTextPreference;
     private CheckBoxPreference mTogglePowerButtonEndsCallPreference;
-    private CheckBoxPreference mToggleHomeButtonAnswersCallPreference;
     private CheckBoxPreference mToggleLockScreenRotationPreference;
     private CheckBoxPreference mToggleSpeakPasswordPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
@@ -239,9 +236,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         } else if (mTogglePowerButtonEndsCallPreference == preference) {
             handleTogglePowerButtonEndsCallPreferenceClick();
             return true;
-        } else if (mToggleHomeButtonAnswersCallPreference == preference) {
-            handleToggleHomeButtonAnswersCallPreferenceClick();
-            return true;
         } else if (mToggleLockScreenRotationPreference == preference) {
             handleLockScreenRotationPreferenceClick();
             return true;
@@ -273,14 +267,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 (mTogglePowerButtonEndsCallPreference.isChecked()
                         ? Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP
                         : Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF));
-    }
-
-    private void handleToggleHomeButtonAnswersCallPreferenceClick() {
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.RING_HOME_BUTTON_BEHAVIOR,
-                (mToggleHomeButtonAnswersCallPreference.isChecked()
-                        ? Settings.Secure.RING_HOME_BUTTON_BEHAVIOR_ANSWER
-                        : Settings.Secure.RING_HOME_BUTTON_BEHAVIOR_DO_NOTHING));
     }
 
     private void handleLockScreenRotationPreferenceClick() {
@@ -332,14 +318,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         if (!KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
                 || !Utils.isVoiceCapable(getActivity())) {
             mSystemsCategory.removePreference(mTogglePowerButtonEndsCallPreference);
-        }
-
-        // Home button answers calls.
-        mToggleHomeButtonAnswersCallPreference =
-            (CheckBoxPreference) findPreference(TOGGLE_HOME_BUTTON_ANSWERS_CALL_PREFERENCE);
-        if (!KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME)
-                || !Utils.isVoiceCapable(getActivity())) {
-            mSystemsCategory.removePreference(mToggleHomeButtonAnswersCallPreference);
         }
 
         // Lock screen rotation.
@@ -509,17 +487,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             final boolean powerButtonEndsCall =
                     (incallPowerBehavior == Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP);
             mTogglePowerButtonEndsCallPreference.setChecked(powerButtonEndsCall);
-        }
-
-        // Home button answers calls.
-        if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME)
-                && Utils.isVoiceCapable(getActivity())) {
-            final int incallHomeBehavior = Settings.Secure.getInt(getContentResolver(),
-                    Settings.Secure.RING_HOME_BUTTON_BEHAVIOR,
-                    Settings.Secure.RING_HOME_BUTTON_BEHAVIOR_DEFAULT);
-            final boolean homeButtonAnswersCall =
-                (incallHomeBehavior == Settings.Secure.RING_HOME_BUTTON_BEHAVIOR_ANSWER);
-            mToggleHomeButtonAnswersCallPreference.setChecked(homeButtonAnswersCall);
         }
 
         // Auto-rotate screen
@@ -1026,8 +993,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             onInstallActionBarToggleSwitch();
             onProcessArguments(getArguments());
             getListView().setDivider(null);
-            getListView().setCacheColorHint(0);
-            getListView().setSelector(android.R.color.transparent);
+            getListView().setEnabled(false);
         }
 
         @Override
@@ -1058,7 +1024,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             ToggleSwitch toggleSwitch = new ToggleSwitch(activity);
             final int padding = activity.getResources().getDimensionPixelSize(
                     R.dimen.action_bar_switch_padding);
-            toggleSwitch.setPaddingRelative(0, 0, padding, 0);
+            toggleSwitch.setPadding(0, 0, padding, 0);
             activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
                     ActionBar.DISPLAY_SHOW_CUSTOM);
             activity.getActionBar().setCustomView(toggleSwitch,

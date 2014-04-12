@@ -50,6 +50,7 @@ import com.android.internal.telephony.PhoneStateIntentReceiver;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
+import java.lang.Integer;
 import java.lang.ref.WeakReference;
 
 /**
@@ -221,9 +222,11 @@ public class Status extends PreferenceActivity {
 
         mRes = getResources();
         sUnknown = mRes.getString(R.string.device_info_default);
+
         if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
             mPhone = PhoneFactory.getDefaultPhone();
         }
+
         // Note - missing in zaku build, be careful later...
         mSignalStrength = findPreference(KEY_SIGNAL_STRENGTH);
         mUptime = findPreference("up_time");
@@ -381,8 +384,11 @@ public class Status extends PreferenceActivity {
 
     private void updateNetworkType() {
         // Whether EDGE, UMTS, etc...
-        setSummaryText(KEY_NETWORK_TYPE, mTelephonyManager.getNetworkTypeName() +
-                ":" + mTelephonyManager.getNetworkType());
+        String networktype = null;
+        if (TelephonyManager.NETWORK_TYPE_UNKNOWN != mTelephonyManager.getNetworkType()) {
+            networktype = mTelephonyManager.getNetworkTypeName();
+        }
+        setSummaryText(KEY_NETWORK_TYPE, networktype);
     }
 
     private void updateDataState() {
@@ -542,8 +548,11 @@ public class Status extends PreferenceActivity {
     private String convert(long t) {
         int s = (int)(t % 60);
         int m = (int)((t / 60) % 60);
-        int h = (int)((t / 3600));
-
-        return h + ":" + pad(m) + ":" + pad(s);
+        int h = (int)((t / 3600) % 24);
+        int d = (int)((t / (3600 * 24)));
+        String day = (d == 0) ? "" :
+                (d == 1) ? getResources().getString(R.string.day) + " " :
+                getResources().getString(R.string.days, Integer.toString(d)) + " ";
+        return day + h + ":" + pad(m) + ":" + pad(s);
     }
 }

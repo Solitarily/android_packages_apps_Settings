@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2007 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -20,6 +20,8 @@
     <string name="no" msgid="6731231425810196216">"Nu"</string>
     <string name="create" msgid="3578857613172647409">"Creaţi"</string>
     <string name="allow" msgid="3349662621170855910">"Permiteți"</string>
+    <string name="day" msgid="7984755014526510295">"1 zi"</string>
+    <string name="days" msgid="2070509222727852210">"<xliff:g id="DAYS">%s</xliff:g> (de) zile"</string>
     <string name="deny" msgid="6947806159746484865">"Refuzați"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Necunoscută"</string>
   <plurals name="show_dev_countdown">

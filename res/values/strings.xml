@@ -26,6 +26,10 @@
     <!-- Strings for Dialog allow button -->
     <string name="allow">Allow</string>
 
+    <!-- Strings for uptime -->
+    <string name="day">"1 day"</string>
+    <string name="days">"<xliff:g id="days">%s</xliff:g> days"</string>
+
     <!-- Strings for Dialog deny button -->
     <string name="deny">Deny</string>
 
@@ -34,17 +38,19 @@
     <string name="device_info_default">Unknown</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable development settings -->
     <plurals name="show_dev_countdown">
-        <item quantity="one">You are now <xliff:g id="step_count">%1$d</xliff:g> step away from enabling development settings.</item>
-        <item quantity="other">You are now <xliff:g id="step_count">%1$d</xliff:g> steps away from enabling development settings.</item>
+        <item quantity="one">You are now <xliff:g id="step_count">%1$d</xliff:g> step away from being a developer.</item>
+        <item quantity="other">You are now <xliff:g id="step_count">%1$d</xliff:g> steps away from being a developer.</item>
     </plurals>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Confirmation that developer settings are enabled -->
-    <string name="show_dev_on">You have enabled development settings!</string>
+    <string name="show_dev_on">You are now a developer!</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Okay we get it, stop pressing, you already have it on -->
-    <string name="show_dev_already">No need, you have already enabled development settings.</string>
+    <string name="show_dev_already">No need, you are already a developer.</string>
 
     <!-- Category headings in left-pane header menu --> <skip />
     <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
     <string name="header_category_wireless_networks">WIRELESS &amp; NETWORKS</string>
+<!-- Settings main menu category heading. Evervolv (Toolbox, etc...). [CHAR LIMIT=40] -->
+    <string name="header_category_evervolv">EVERVOLV</string>
     <!-- Settings main menu category heading. Device (Sound, display, battery, applications...). [CHAR LIMIT=40] -->
     <string name="header_category_device">DEVICE</string>
     <!-- Settings main menu category heading. Personal (Accounts, security, language, backup...). [CHAR LIMIT=40] -->
@@ -1661,6 +1667,8 @@
     <string name="vibrate_in_silent_title">Vibrate when silent</string>
     <!-- Sound settings screen, setting option name -->
     <string name="notification_sound_title">Default notification sound</string>
+    <!-- Sound settings screen, notification light repeat pulsing title -->
+    <string name="notification_pulse_title">Pulse notification light</string>
     <!-- Sound settings screen, the title of the volume bar to adjust the incoming call volume -->
     <string name="incoming_call_volume_title">Ringtone</string>
     <!-- Sound settings screen, the title of the volume bar to adjust the notification volume -->
@@ -1872,6 +1880,8 @@
     <!-- About phone screen,  setting option name-->
     <string name="build_number">Build number</string>
     <!-- About phone screen,  setting option name-->
+    <string name="mod_version">Mod version</string>
+    <string name="mod_version_default">Unknown</string>
     <string name="selinux_status">SELinux status</string>
 
     <!-- About phone screen, show when a value of some status item is unavailable. -->
@@ -2550,8 +2560,7 @@
         <li>Disabled apps</li>\n
         <li>Disabled app notifications</li>\n
         <li>Default applications for actions</li>\n
-        <li>Background data restrictions for apps</li>\n
-        <li>Privacy guard</li>\n\n
+        <li>Background data restrictions for apps</li>\n\n
         You will not lose any app data.</string>
     <!-- [CHAR LIMIT=25] Manage applications screen, menu item.  Confirmation button of dialog to confirm resetting user's app preferences. -->
     <string name="reset_app_preferences_button">Reset apps</string>
@@ -2696,6 +2705,7 @@
     <string name="app_disable_notifications_dlg_text">
         If you turn off notifications for this app, you may miss important alerts and updates.
     </string>
+
     <!-- [CHAR LIMIT=25] Services settings screen, setting option name for the user to go to the screen to view app storage use -->
     <string name="storageuse_settings_title">Storage use</string>
     <!-- Services settings screen, setting option summary for the user to go to the screen to app storage use -->
@@ -2973,10 +2983,10 @@
     <string name="development_settings_title">Developer options</string>
     <!-- Development Settings summary.  The summary of the item to take the user to Development settings.  Development settings are settings meant for application developers. -->
     <string name="development_settings_summary">Set options for app development</string>
-    <!-- Setting checkbox title for Whether to enable Android debugging support on the phone. -->
-    <string name="enable_adb">Android debugging</string>
-    <!-- Setting checkbox summary for Whether to enable Android debugging support on the phone -->
-    <string name="enable_adb_summary">Allow Android debug mode, the ADB interface on USB (or on network)</string>
+    <!-- Setting checkbox title for Whether to enable USB debugging support on the phone. -->
+    <string name="enable_adb">USB debugging</string>
+    <!-- Setting checkbox summary for Whether to enable USB debugging support on the phone -->
+    <string name="enable_adb_summary">Debug mode when USB is connected</string>
     <!-- [CHAR LIMIT=NONE] Setting checkbox title for Whether to include bug report item in power menu. -->
     <string name="bugreport_in_power">Power menu bug reports</string>
     <!-- [CHAR LIMIT=NONE] Setting checkbox summary for Whether to include bug report item in power -->
@@ -4260,6 +4270,16 @@
     <string name="selinux_status_permissive">Permissive</string>
     <string name="selinux_status_enforcing">Enforcing</string>
 
+    <!-- Evervolv Settings -->
+    <!-- Title for the user to open the EVToolbox app -->
+    <string name="evtoolbox_settings">Toolbox</string>
+    <!-- Title for the user to open the EVUpdater app -->
+    <string name="evupdater_settings">Updates</string>
+    <!-- Main settings screen, setting title for the user to open the Themes app -->
+    <string name="themes_settings">Themes</string>
+    <!-- Advanced, Device specific (DeviceParts) settings  -->
+    <string name="advanced_settings_title">Advanced</string>
+
     <!-- User settings -->
     <skip/>
 
@@ -4378,5 +4398,16 @@
     <string name="cell_broadcast_settings">Cell broadcasts</string>
     <!-- Cell Broadcast settings description [CHAR LIMIT=100] -->
     <string name="cell_broadcast_settings_summary">Select the types of emergency alerts to display.</string>
-    <string name="s2w_switch_title">S2W Switch</string>
+
+    <!-- Wireless display -->
+    <string name="pref_wifi_disable_hdcp_title">Skip HDCP negotiation</string>
+    <string name="pref_wifi_disable_hdcp_summary">Try this option if you can connect but don\'t get any output</string>
+
+    <!-- Hostname setting -->
+    <string name="device_hostname">Device hostname</string>
+
+    <!-- convert sound to vibration toggle -->
+    <string name="notification_convert_sound_to_vibration_title">Vibrate on notification</string>
+    <string name="notification_convert_sound_to_vibration_summary">In vibrate mode, all notifications will vibrate regardless of individual app settings</string>
+
 </resources>
